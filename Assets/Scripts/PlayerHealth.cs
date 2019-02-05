@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth { get; set; }
     public float maxHealth { get; set; }
     public Slider healthbar;
+    public Text text;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +21,7 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("x"))
-        {
-            Attack(6);
-        }
+        
     }
 
     void Attack(float damage)
@@ -44,6 +42,14 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth = 0;
             healthbar.value = healthPercent();
-            Debug.Log("You have died!");
+            text.text = "Loser!";
+        }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.name[0] == 'O')
+        {
+            Attack(2.5f);
         }
     }
+}
